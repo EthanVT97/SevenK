@@ -1,0 +1,23 @@
+{
+    "name": "sevenk",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "frontend",
+        "backend"
+    ],
+    "scripts": {
+        "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+        "start:frontend": "npm run start --workspace=frontend",
+        "start:backend": "npm run start --workspace=backend",
+        "build": "npm run build --workspaces",
+        "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\""
+    },
+    "devDependencies": {
+        "concurrently": "^8.0.1",
+        "typescript": "~4.9.5"
+    },
+    "overrides": {
+        "typescript": "^4.9.5"
+    }
+}
