@@ -1,0 +1,26 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "frontend/**/*",
+            "use": "@vercel/static",
+            "config": {
+                "buildCommand": "npm run build",
+                "outputDirectory": "dist"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/frontend/$1"
+        }
+    ],
+    "outputDirectory": "frontend",
+    "engines": {
+        "node": "18.x"
+    }
+}
