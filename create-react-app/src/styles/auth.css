@@ -1,0 +1,156 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+}
+
+.auth-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #282c34;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #282c34;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #61dafb;
+    color: #282c34;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #4fa8d5;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f8d7da;
+    border-radius: 4px;
+}
+
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+input[type="tel"] {
+    font-family: monospace;
+    letter-spacing: 0.1em;
+}
+
+input[type="tel"]::placeholder {
+    letter-spacing: normal;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4fa8d5;
+    box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.2);
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.phone-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.phone-input-group input {
+    flex: 1;
+}
+
+.otp-button,
+.verify-button {
+    padding: 0.75rem 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.otp-button:hover,
+.verify-button:hover {
+    background-color: #218838;
+}
+
+.otp-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.otp-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.otp-input-group input {
+    flex: 1;
+    text-align: center;
+    letter-spacing: 0.5em;
+    font-size: 1.2rem;
+}
+
+.verified-badge {
+    color: #28a745;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.verified-badge svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* Timer styles */
+.resend-timer {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}

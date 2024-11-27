@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_routes_1 = __importDefault(require("./auth.routes"));
+const banner_routes_1 = __importDefault(require("./banner.routes"));
+const admin_routes_1 = __importDefault(require("./admin.routes"));
+const wallet_routes_1 = __importDefault(require("./wallet.routes"));
+const transaction_routes_1 = __importDefault(require("./transaction.routes"));
+const support_routes_1 = __importDefault(require("./support.routes"));
+const payment_routes_1 = __importDefault(require("./payment.routes"));
+const withdrawal_routes_1 = __importDefault(require("./withdrawal.routes"));
+const router = (0, express_1.Router)();
+router.use('/auth', auth_routes_1.default);
+router.use('/banners', banner_routes_1.default);
+router.use('/admin', admin_routes_1.default);
+router.use('/wallet', wallet_routes_1.default);
+router.use('/transactions', transaction_routes_1.default);
+router.use('/support', support_routes_1.default);
+router.use('/payments', payment_routes_1.default);
+router.use('/withdrawals', withdrawal_routes_1.default);
+exports.default = router;

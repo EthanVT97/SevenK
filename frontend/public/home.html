@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SevenK - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-gold: #996515;
+            --metallic-gold: #D4AF37;
+            --deep-gold: #AA771C;
+            --light-gold: #FFD700;
+
+            /* Light Theme Colors */
+            --bg-color: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --text-color: white;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Theme Class */
+        body.light-theme {
+            --bg-color: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            --text-color: #333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(145deg, var(--metallic-gold), var(--dark-gold));
+            padding: 1rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .game-section {
+            padding: 2rem 0;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .game-icon {
+            font-size: 2.5rem;
+            color: var(--metallic-gold);
+            margin-bottom: 1rem;
+        }
+
+        .wallet-section {
+            background: linear-gradient(145deg, rgba(153, 101, 21, 0.2), rgba(212, 175, 55, 0.2));
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .balance {
+            font-size: 1.5rem;
+            color: var(--metallic-gold);
+            font-weight: bold;
+        }
+
+        .btn-gold {
+            background: linear-gradient(145deg, var(--metallic-gold), var(--dark-gold));
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(145deg, var(--dark-gold), var(--metallic-gold));
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .footer {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid var(--dark-gold);
+        }
+
+        .promotions-section {
+            margin: 20px 0;
+        }
+
+        .promotion-card {
+            background: linear-gradient(145deg, rgba(153, 101, 21, 0.2), rgba(212, 175, 55, 0.2));
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .promotion-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            color: white;
+        }
+
+        .promotion-icon {
+            font-size: 2.5rem;
+            color: var(--metallic-gold);
+        }
+
+        .promotion-text {
+            flex: 1;
+        }
+
+        .promotion-text h5 {
+            color: var(--metallic-gold);
+            margin-bottom: 5px;
+        }
+
+        .promotion-text p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            opacity: 0.8;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .promotion-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .promotion-text p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Add animation for promotion cards */
+        .carousel-item {
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .promotion-card {
+            animation: cardPulse 2s infinite;
+        }
+
+        @keyframes cardPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        .chat-bot {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-bot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--metallic-gold), var(--dark-gold));
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-bot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 300px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .chat-header {
+            background: linear-gradient(145deg, var(--metallic-gold), var(--dark-gold));
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            background: linear-gradient(145deg, var(--metallic-gold), var(--dark-gold));
+            color: white;
+            margin-right: auto;
+        }
+
+        .user-message {
+            background: #e9ecef;
+            color: #212529;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            background: white;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--dark-gold);
+        }
+
+        .send-btn {
+            background: linear-gradient(145deg, var(--metallic-gold), var(--dark-gold));
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 576px) {
+            .chat-container {
+                width: 280px;
+                height: 350px;
+                bottom: 70px;
+            }
+        }
+
+        #themeToggle {
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        #themeToggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        #themeIcon {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme #themeIcon {
+            color: var(--dark-gold);
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'index.html';
+        }
+
+        // Get user data
+        const userData = JSON.parse(localStorage.getItem('user') || '{}');
+
+        // Update UI with user data
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update balance
+            const balanceElements = document.querySelectorAll('.balance');
+            balanceElements.forEach(el => {
+                el.textContent = `MMK ${userData.walletBalance || 0}`;
+            });
+
+            // Update name if available
+            if (userData.name) {
+                const profileLink = document.querySelector('a[href="#"]');
+                if (profileLink) {
+                    profileLink.innerHTML = `<i class="fas fa-user"></i> ${userData.name}`;
+                }
+            }
+        });
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./assets/images/logo/logo.png" alt="SevenK Logo">
+                SevenK
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="themeToggle">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-history"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-gift"></i> Promotions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-headset"></i> Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Quick Stats Section -->
+        <div class="quick-stats mb-4">
+            <div class="row">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-wallet"></i>
+                        <h6>Balance</h6>
+                        <h4>MMK 50,000</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-trophy"></i>
+                        <h6>Total Wins</h6>
+                        <h4>12</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h6>Active Tickets</h6>
+                        <h4>3</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <h6>VIP Level</h6>
+                        <h4>Silver</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotions Section -->
+        <div class="promotions-section mb-4">
+            <div class="promotion-carousel">
+                <div id="promotionCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="promotion-card">
+                                <div class="promotion-content">
+                                    <i class="fas fa-gift promotion-icon"></i>
+                                    <div class="promotion-text">
+                                        <h5>Welcome Bonus 🎉</h5>
+                                        <p>Get 100% bonus up to 50,000 MMK on your first deposit!</p>
+                                    </div>
+                                    <button class="btn btn-gold btn-sm">Claim Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="promotion-card">
+                                <div class="promotion-content">
+                                    <i class="fas fa-percentage promotion-icon"></i>
+                                    <div class="promotion-text">
+                                        <h5>Daily Cashback 💰</h5>
+                                        <p>Enjoy 5% cashback on all your daily plays!</p>
+                                    </div>
+                                    <button class="btn btn-gold btn-sm">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="promotion-card">
+                                <div class="promotion-content">
+                                    <i class="fas fa-users promotion-icon"></i>
+                                    <div class="promotion-text">
+                                        <h5>Refer & Earn 👥</h5>
+                                        <p>Get 10,000 MMK for each friend you refer!</p>
+                                    </div>
+                                    <button class="btn btn-gold btn-sm">Invite Friends</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Section -->
+        <div class="wallet-section">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h5>Quick Actions</h5>
+                    <div class="balance">MMK 50,000</div>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-gold me-2" data-bs-toggle="modal" data-bs-target="#depositModal">
+                        <i class="fas fa-plus"></i> Deposit
+                    </button>
+                    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#withdrawModal">
+                        <i class="fas fa-minus"></i> Withdraw
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div class="game-section">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="game-card text-center">
+                        <div class="game-icon">
+                            <i class="fas fa-dice"></i>
+                        </div>
+                        <h4>2D Games</h4>
+                        <p>Next Draw: <span class="countdown">11:30 AM</span></p>
+                        <div class="game-actions">
+                            <button class="btn btn-gold me-2">Play Modern</button>
+                            <button class="btn btn-gold">Play Internet</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="game-card text-center">
+                        <div class="game-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h4>3D Games</h4>
+                        <p>Next Draw: Monthly</p>
+                        <div class="game-actions">
+                            <button class="btn btn-gold">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Results Section -->
+        <div class="results-section mb-4">
+            <h5>Recent Results</h5>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Game</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-02-20</td>
+                            <td>11:00 AM</td>
+                            <td>2D Modern</td>
+                            <td>85</td>
+                        </tr>
+                        <tr>
+                            <td>2024-02-20</td>
+                            <td>4:30 PM</td>
+                            <td>2D Internet</td>
+                            <td>42</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div class="modal fade" id="depositModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Deposit Funds</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="depositForm">
+                        <div class="mb-3">
+                            <label class="form-label">Amount (MMK)</label>
+                            <input type="number" class="form-control" min="1000" step="1000" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-select">
+                                <option value="kbz">KBZ Pay</option>
+                                <option value="wave">Wave Money</option>
+                                <option value="cb">CB Pay</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">Proceed to Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div class="modal fade" id="withdrawModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Withdraw Funds</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="withdrawForm">
+                        <div class="mb-3">
+                            <label class="form-label">Amount (MMK)</label>
+                            <input type="number" class="form-control" min="5000" step="1000" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Withdrawal Method</label>
+                            <select class="form-select">
+                                <option value="kbz">KBZ Pay</option>
+                                <option value="wave">Wave Money</option>
+                                <option value="cb">CB Pay</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Account Number</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">Request Withdrawal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>Contact Support</h6>
+                    <div class="support-links">
+                        <a href="#" class="text-light"><i class="fab fa-viber"></i> Viber</a>
+                        <a href="#" class="text-light ms-3"><i class="fab fa-telegram"></i> Telegram</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-0">© 2024 SevenK. All rights reserved.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="social-links">
+                        <a href="#" class="text-light"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-light ms-3"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Bot -->
+    <div class="chat-bot">
+        <div class="chat-container hidden" id="chatContainer">
+            <div class="chat-header">
+                <h6 class="mb-0"><i class="fas fa-robot"></i> SevenK Support</h6>
+                <button class="btn-close btn-close-white" id="closeChatBtn"></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    မဂ်လာပါ SevenK Online 2D 3D မှ ကြိုဆိုပါတယ်ရှင်
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." id="chatInput">
+                <button class="send-btn" id="sendMessageBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="chat-bot-toggle" id="chatBotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            Swal.fire({
+                title: 'ထွက်ခွာမှာလား?',
+                text: 'သင့်အကောင့်မှ ထွက်ခွာမှာ သေချာပါသလား?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'ထွက်မည်',
+                cancelButtonText: 'မထွက်ပါ',
+                confirmButtonColor: '#996515',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Clear user data and token
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+
+                    // Show logout success message
+                    Swal.fire({
+                        title: 'ထွက်ခွာခြင်း အောင်မြင်ပါသည်',
+                        text: 'ကျေးဇူးတင်ပါသည်',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true
+                    }).then(() => {
+                        // Redirect to login page
+                        window.location.href = 'index.html';
+                    });
+                }
+            });
+        });
+
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Initialize the carousel with auto-play
+        const promotionCarousel = new bootstrap.Carousel(document.getElementById('promotionCarousel'), {
+            interval: 3000,
+            ride: 'carousel',
+            wrap: true
+        });
+
+        // Chat bot functionality
+        const chatBotToggle = document.getElementById('chatBotToggle');
+        const chatContainer = document.getElementById('chatContainer');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const chatMessages = document.getElementById('chatMessages');
+
+        // Show welcome message after a short delay when page loads
+        setTimeout(() => {
+            chatBotToggle.classList.add('pulse');
+        }, 2000);
+
+        chatBotToggle.addEventListener('click', () => {
+            chatContainer.classList.toggle('hidden');
+            chatBotToggle.classList.remove('pulse');
+        });
+
+        closeChatBtn.addEventListener('click', () => {
+            chatContainer.classList.add('hidden');
+        });
+
+        function addMessage(message, isBot = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isBot ? 'bot-message' : 'user-message'}`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        sendMessageBtn.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, false);
+                chatInput.value = '';
+                // Simulate bot response
+                setTimeout(() => {
+                    addMessage('ကျေးဇူးပြု၍ ခဏစောင့်ပေးပါ။ မကြာခင်ပြန်လည်ဖြေကြားပေးပါမည်။', true);
+                }, 1000);
+            }
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessageBtn.click();
+            }
+        });
+
+        // Add pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+            .pulse {
+                animation: pulse 2s infinite;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Theme switcher functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-theme');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            body.classList.toggle('light-theme');
+
+            // Update icon
+            if (body.classList.contains('light-theme')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+
+            // Show theme change notification
+            const theme = body.classList.contains('light-theme') ? 'Light' : 'Dark';
+            Swal.fire({
+                title: `${theme} Theme Activated`,
+                icon: 'success',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                background: body.classList.contains('light-theme') ? '#fff' : '#333',
+                color: body.classList.contains('light-theme') ? '#333' : '#fff'
+            });
+        });
+    </script>
+</body>
+
+</html>

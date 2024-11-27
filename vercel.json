@@ -1,26 +1,38 @@
 {
     "version": 2,
+    "buildCommand": "npm run build",
+    "outputDirectory": "create-react-app/.next",
     "builds": [
         {
-            "src": "frontend/**/*",
-            "use": "@vercel/static",
-            "config": {
-                "buildCommand": "npm run build",
-                "outputDirectory": "dist"
-            }
+            "src": "backend/src/index.ts",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "create-react-app/package.json",
+            "use": "@vercel/next"
         }
     ],
     "routes": [
         {
-            "handle": "filesystem"
+            "src": "/api/(.*)",
+            "dest": "backend/src/index.ts"
         },
         {
             "src": "/(.*)",
-            "dest": "/frontend/$1"
+            "dest": "create-react-app/$1"
         }
     ],
-    "outputDirectory": "frontend",
-    "engines": {
-        "node": "18.x"
+    "env": {
+        "NODE_ENV": "production",
+        "DB_HOST": "@db_host",
+        "DB_PORT": "@db_port",
+        "DB_NAME": "@db_name",
+        "DB_USER": "@db_user",
+        "DB_PASSWORD": "@db_password",
+        "JWT_SECRET": "@jwt_secret",
+        "JWT_EXPIRES_IN": "24h",
+        "SMS_API_KEY": "@sms_api_key",
+        "SMS_SENDER_ID": "@sms_sender_id",
+        "NEXT_PUBLIC_API_URL": "@next_public_api_url"
     }
 }

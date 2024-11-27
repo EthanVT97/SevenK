@@ -1,45 +1,36 @@
 import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import { logger } from '../utils/logger';
 
 dotenv.config();
 
-export const sequelize = new Sequelize({
-    database: 'sevenk',
-    username: 'root',
-    password: '',
-    host: '127.0.0.1',
+const sequelize = new Sequelize({
     dialect: 'mysql',
-    port: 3306,
-    logging: (msg) => logger.debug(msg),
-    dialectOptions: {
-        connectTimeout: 60000,
-        charset: 'utf8mb4'
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '3306'),
+    username: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'sevenk_db',
+    logging: false,
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
     }
 });
 
-export const testConnection = async () => {
+export const initDatabase = async (): Promise<void> => {
     try {
         await sequelize.authenticate();
-        logger.info('Database connection established successfully');
+        logger.info('Database connection has been established successfully.');
+
+        await sequelize.sync({ alter: true });
+        logger.info('All models were synchronized successfully.');
     } catch (error) {
         logger.error('Unable to connect to the database:', error);
         throw error;
     }
 };
 
-export const initializeModels = async () => {
-    try {
-        // Import models
-        const { default: UserModel } = await import('../models/user.model');
-        const { default: BannerModel } = await import('../models/banner.model');
-
-        // Sync all models
-        await sequelize.sync({ alter: true });
-
-        logger.info('Models synchronized successfully');
-    } catch (error) {
-        logger.error('Error synchronizing models:', error);
-        throw error;
-    }
-}; 
+export default sequelize; 
